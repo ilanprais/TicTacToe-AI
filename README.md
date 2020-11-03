@@ -1,2 +1,2 @@
-# TicTacToe-AI
-Tic Tac Toe game verson person or ai
+# TicTacToe Game - play versus another person or verson an AI
+
