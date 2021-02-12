@@ -8,7 +8,7 @@ class Board():
 		self.initGrid()
 			
 	def initGrid(self):
-		self.grid = [[BLANK, BLANK, BLANK], [BLANK, BLANK, BLANK], [BLANK, BLANK, BLANK]]
+		self.grid = []
 		for i in range(self.size):
 				inner = []
 				for j in range(self.size):		
