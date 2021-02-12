@@ -24,7 +24,7 @@ class Tboard():
 		self.pressedZone = None
 
 	def runTurn(self):
-		if self.players[self.current].doTurn(self.board, self.pressedZone):
+		if self.players[self.current].doTurn(self, self.pressedZone):
 			self.switchPlayer()
 
 	def switchPlayer(self):
@@ -44,9 +44,6 @@ class Tboard():
 					return player
 		return None
 
-	def ended(self):
-		return self.board.full() or self.winner() != None
-
 	def lineEq(self, startRow, startCol, rowJump, colJump, symbol):
 		i = startRow
 		j = startCol
@@ -58,11 +55,14 @@ class Tboard():
 
 		return True
 
+	def ended(self):
+		return self.board.full() or self.winner() != None
+
 	def setPressZone(self, pos, screenSize):
 		zone = None
 		cellSize = int(screenSize / self.size)
 		if not pos == None:
-			index = [int(pos[0]/cellSize), int(pos[1]/cellSize)]
+			index = [int(pos[1]/cellSize), int(pos[0]/cellSize)]
 			if index[0] < self.size and index[1] < self.size and index[0] >= 0 and index[1] >= 0:
 				zone = index
 		self.pressedZone = zone
@@ -100,7 +100,7 @@ class Tboard():
 				pygame.draw.line(surface, CELL_COLOR, (0, x*cellSize), (surface.get_width(), x*cellSize))
 			for y in range(self.size):
 				symbol = large.render(self.board.get(x, y), False, CELL_COLOR)
-				surface.blit(symbol,(int(x*cellSize + cellSize/4), int(y*cellSize + cellSize/4)))
+				surface.blit(symbol,(int(y*cellSize + cellSize/4), int(x*cellSize + cellSize/4)))
 
 	def __str__(self):
 		return self.board.__str__()
